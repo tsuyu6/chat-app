@@ -2,6 +2,8 @@
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
+# コメントアウトを外す
+Rails.root.glob('spec/support/**/*.rb').sort.each { |f| require f }
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
@@ -33,6 +35,9 @@ I18n.locale = "en"
 # RSpec.configure do |config|〜endの外に記載しましょう。
 
 RSpec.configure do |config|
+  # 追記
+  config.include SignInSupport
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = Rails.root.join('spec/fixtures')
 
